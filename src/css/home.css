@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+    background-color: #97BC62;
+}
+.container{
+    background-color: #2C5F2D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    gap: 15px;
+    padding:20px;
+    width:100vw;
+    height:100vh;
+}
+.tableData{
+     height: 370px;
+      padding:10px;
+    
+}
+th{
+    padding:5px;
+    font-size: large;
+     
+}
+td{
+    padding: 5px;
+    text-align: center;
+    
+}
+tr{
+    padding: 5px;
+    
+}
+.btn{
+    display: flex;
+     flex-direction: column;
+     gap: 5px;
+}
+button{
+    border-radius: 5px;
+    background-color: aliceblue;
+    height:1.5rem;
+    font-weight: 300;
+    font-size:small;
+   
+    
+}
+ .delete:hover{
+    background-color:rgba(215, 46, 27, 0.941);
+    color: white;
+}
+.update:hover{
+    background-color: rgb(24, 53, 196);
+    color: white;
+}
+.topbtn{
+    height:1rem;
+    background-color: transparent;
+    border: transparent;
+}
+.lbl{
+    padding: 5px;
+    width: 5rem;
+    border-radius: 10px;
+    text-align: center;
+     
+     
+    
+}
+.lbl:hover{
+        background-color: rgb(24, 53, 196);
+            color: white;
+}
+.subContainer{
+    display: flex;
+    flex-direction:row-reverse;
+  
+    gap:23.5rem;
+     
+}
+h2{
+    padding:5px;
+    border-radius: 5px;
+}
+.sort{
+    text-align: center;
+}
+.bottombtn{
+    height: 1rem;
+        background-color: transparent;
+        border: transparent;
+        text-align: center;
+        font-size: medium;
+}
+.below{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    height: 30px;
+    padding: 5px;
+        width: 5rem;
+        border-radius: 10px;
+        text-align: center;
+        width: 10rem;
+        border-radius: 10px;
+       
+}
