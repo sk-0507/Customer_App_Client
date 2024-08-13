@@ -79,9 +79,10 @@ button{
 .subContainer{
     display: flex;
     flex-direction:row-reverse;
-  
-    gap:23.5rem;
-     
+    justify-content: center;
+    align-items:center;
+    gap:5.5rem;
+     padding: 5px;
 }
 h2{
     padding:5px;
@@ -109,4 +110,21 @@ h2{
         width: 10rem;
         border-radius: 10px;
        
+}
+.sync{
+    height: 3rem;
+    width: 2rem;
+    border-radius: 5px;
+        background-color: aliceblue;
+        height: 1.5rem;
+        font-weight: 300;
+        font-size: small;
+}
+.sync:hover{
+    background-color: rgb(24, 53, 196);
+    color: white;
+}
+.search{
+    background-color: aliceblue;
+    
 }

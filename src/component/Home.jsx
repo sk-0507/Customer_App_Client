@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/home.css"
+import "../css/home.css";
+import debounce from "lodash.debounce"; // Import lodash.debounce
 
 function Home() {
   const [customers, setCustomers] = useState([]);
@@ -8,44 +9,51 @@ function Home() {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
   const [sort, setSort] = useState("");
+  const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchCustomers();
-  }, [page, size, sort]);
-
   const token = localStorage.getItem("authToken");
 
-  const fetchCustomers = async () => {
-    setLoading(true);
-    setError(null); // Reset error before fetching
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/customers/private/ListOfCustomer?page=${page}&size=${size}&sort=${sort}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+  // Debounced fetchCustomers function
+  const fetchCustomers = useCallback(
+    debounce(async () => {
+      setLoading(true);
+      setError(null); // Reset error before fetching
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/customers/private/ListOfCustomer?search=${encodeURIComponent(
+            search
+          )}&page=${page}&size=${size}&sort=${sort}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Error fetching customers");
         }
-      );
 
-      if (!response.ok) {
-        throw new Error("Error fetching customers");
+        const data = await response.json();
+        setCustomers(data.content);
+      } catch (error) {
+        setError(error.message); // Set error message to display
+      } finally {
+        setLoading(false);
       }
+    }, 300),
+    [search, page, size, sort, token]
+  ); // Debounce delay of 300ms
 
-      const data = await response.json();
-      setCustomers(data.content);
-    } catch (error) {
-      setError(error.message); // Set error message to display
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    fetchCustomers(); // Trigger fetch on dependencies change
+  }, [fetchCustomers]);
 
-  const handleUpdate = async (id) => {
+  const handleUpdate = (id) => {
     navigate(`/update/${id}`);
   };
 
@@ -66,7 +74,7 @@ function Home() {
         throw new Error("Error deleting customer");
       }
 
-      fetchCustomers();
+      fetchCustomers(); // Refresh list after deletion
     } catch (error) {
       setError(error.message); // Set error message to display
     }
@@ -75,9 +83,35 @@ function Home() {
   const handleSortChange = (e) => {
     setSort(e.target.value);
   };
-  const handleOnClickAddUser = () =>{
+
+  const handleOnClickAddUser = () => {
     navigate("/creatCustomer");
-  }
+  };
+
+  const handleScnc = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/customers/userList",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Error fetching customers");
+      }
+      console.log(">>>>>>>", await response.json());
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -91,6 +125,23 @@ function Home() {
             ADD Customer
           </button>
         </label>
+        <div className="search">
+          <input
+            className="search"
+            type="text"
+            placeholder="Search by name"
+            value={search}
+            onChange={handleSearch} // Update search state on input change
+          />
+          <button className="search-btn" onClick={fetchCustomers}>
+            Search
+          </button>
+        </div>
+        <div>
+          <button className="sync" onClick={handleScnc}>
+            Sync
+          </button>
+        </div>
         <div className="filter-container">
           <label className="sort" htmlFor="filter">
             Sort by:
@@ -124,8 +175,8 @@ function Home() {
             customers.map((customer) => (
               <tr key={customer.id}>
                 <td>{customer.id}</td>
-                <td>{customer.firstName}</td>
-                <td>{customer.lastName}</td>
+                <td>{customer.first_name}</td>
+                <td>{customer.last_name}</td>
                 <td>{customer.city}</td>
                 <td>{customer.email}</td>
                 <td>{customer.phone}</td>

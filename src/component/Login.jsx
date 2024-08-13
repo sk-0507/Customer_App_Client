@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../css/Login.css";  
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,14 +40,14 @@ const Login = () => {
       //navigate("/dashboard");
 
       console.log("Login successful:", data);
-      navigate("/home")
+      navigate("/home");
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -67,7 +68,7 @@ const Login = () => {
             required
           />
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Login</button>
       </form>
     </div>

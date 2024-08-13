@@ -1,0 +1,105 @@
+/* Container for the signup form */
+.signup-container {
+    max-width: 450px;
+    margin: 80px auto;
+    /* Center the form and add margin from the top */
+    padding: 20px;
+    border: 1px solid #ddd;
+    /* Light border for a subtle look */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+    background-color: #ffffff;
+    /* White background for clarity */
+}
+
+/* Styling the form header */
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    /* Larger font size for the heading */
+    color: #333;
+    /* Dark color for better readability */
+}
+
+/* Form layout */
+.signup-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Space between form elements */
+}
+
+/* Label styling */
+.signup-container label {
+    font-size: 14px;
+    /* Slightly smaller font size */
+    color: #555;
+    /* Lighter color for labels */
+    margin-bottom: 5px;
+    /* Space below labels */
+}
+
+/* Input field styling */
+.signup-container input {
+    padding: 12px;
+    /* Increased padding for better usability */
+    border: 1px solid #ccc;
+    /* Standard border color */
+    border-radius: 6px;
+    /* Rounded corners */
+    font-size: 16px;
+    /* Larger font size for readability */
+}
+
+/* Button styling */
+.signup-container button {
+    /* padding: 12px; */
+    border: none;
+    border-radius: 6px;
+    /* Rounded corners */
+    background-color: #007bff;
+    /* Primary color */
+    color: #ffffff;
+    /* White text color */
+    font-size: 18px;
+    /* Larger font size for button text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+    text-align: center;
+    /* Center the text inside the button */
+}
+
+/* Button hover effect */
+.signup-container button:hover {
+    background-color: #0056b3;
+    /* Darker shade on hover */
+}
+
+/* Error message styling */
+.error-message {
+    color: #d9534f;
+    /* Bootstrap red for error messages */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Link styling */
+.signup-container a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #007bff;
+    /* Primary color for links */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.signup-container a:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}

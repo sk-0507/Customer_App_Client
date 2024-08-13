@@ -1,0 +1,85 @@
+/* Container for the update form */
+.update-form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    /* Center the form horizontally with margin */
+    padding: 20px;
+    border: 1px solid #ddd;
+    /* Light border for subtle look */
+    border-radius: 8px;
+    /* Rounded corners for modern appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for depth */
+    background-color: #ffffff;
+    /* Clean white background */
+}
+
+/* Styling the form heading */
+.update-form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    /* Larger font size for heading */
+    color: #333;
+    /* Darker color for readability */
+}
+
+/* Styling the form elements */
+.update-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Space between form elements */
+}
+
+/* Styling form labels */
+.update-form-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    /* Darker color for labels */
+}
+
+/* Input field styling */
+.update-form-container input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    /* Standard border color */
+    border-radius: 4px;
+    /* Slightly rounded corners */
+    font-size: 16px;
+    /* Larger font size for readability */
+    width: 100%;
+    /* Full width input fields */
+}
+
+/* Button styling */
+.update-form-container button {
+    /* padding: 12px; */
+    border: none;
+    border-radius: 4px;
+    /* Rounded corners */
+    background-color: #007bff;
+    /* Primary color */
+    color: #ffffff;
+    /* White text color */
+    font-size: 16px;
+    /* Larger font size for button text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+    align-self: center;
+    /* Center the button horizontally */
+}
+
+.update-form-container button:hover {
+    background-color: #0056b3;
+    /* Darker shade on hover */
+}
+
+/* Error message styling */
+.update-form-container .error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}

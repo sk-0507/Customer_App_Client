@@ -1,0 +1,78 @@
+/* Container for the login form */
+.login-container {
+    max-width: 500px;
+    margin: 150px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background-color: #f9f9f9;
+}
+
+/* Styling the form elements */
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-container label {
+    font-size: 15px;
+    color: #666;
+}
+
+.login-container input {
+    padding: 12px;
+    border: 1px solid #aaa;
+    /* Thinner border for the email container */
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* Added smooth transition */
+}
+
+.login-container input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Light blue shadow on focus */
+}
+
+.login-container button {
+    /* padding: 14px;
+    border: none; */
+    border-radius: 8px;
+    background-color: #007bff;
+    color: #ffffff;
+    /* font-size: 18px; */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* margin-bottom: 10px; */
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.login-container button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Light blue shadow on focus */
+}
+
+.error-message {
+    color: #d9534f;
+    text-align: center;
+    margin-bottom: 15px;
+}

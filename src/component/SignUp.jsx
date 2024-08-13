@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import "../css/Signup.css"; // Import the CSS file
 
 const Signup = () => {
-  const [fullName, setfullName] = useState("");
-   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
   const handleSignup = async (event) => {
     event.preventDefault();
     try {
@@ -23,7 +25,7 @@ const Signup = () => {
 
       if (!response.ok) {
         throw new Error("Error occurred during signup");
-      } 
+      }
 
       const data = await response.json();
       // Handle successful signup (e.g., redirect to login)
@@ -35,7 +37,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Signup</h2>
       <form onSubmit={handleSignup}>
         <div>
@@ -43,11 +45,10 @@ const Signup = () => {
           <input
             type="text"
             value={fullName}
-            onChange={(e) => setfullName(e.target.value)}
+            onChange={(e) => setFullName(e.target.value)}
             required
           />
         </div>
-       
         <div>
           <label>Email:</label>
           <input
@@ -66,8 +67,9 @@ const Signup = () => {
             required
           />
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Signup</button>
+        <Link to="/login">Already have an account? Login</Link>
       </form>
     </div>
   );

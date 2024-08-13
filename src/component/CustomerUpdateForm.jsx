@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../css/Update.css"; // Import the CSS file
 
 function CustomerUpdateForm() {
   const { id } = useParams(); // Get customer ID from URL params
-  //const history = useHistory(); // For navigation after form submission
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [customer, setCustomer] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     city: "",
     phone: "",
-    address:"",
-    street:"",
-    state:""
+    address: "",
+    street: "",
+    state: "",
   });
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-    
+
   // Fetch customer details when the component mounts
   useEffect(() => {
     const fetchCustomer = async () => {
@@ -31,7 +30,6 @@ function CustomerUpdateForm() {
               "Content-Type": "application/json",
               Authorization: `Bearer ${localStorage.getItem("authToken")}`,
             },
-           
           }
         );
         if (!response.ok) {
@@ -78,37 +76,37 @@ function CustomerUpdateForm() {
         throw new Error("Error updating customer");
       }
 
-       navigate("/home"); // Redirect to customers list after update
+      navigate("/home"); // Redirect to customers list after update
     } catch (error) {
       setError(error);
     }
   };
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div className="error-message">Error: {error.message}</div>;
 
   return (
-    <div>
+    <div className="update-form-container">
       <h2>Update Customer</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="first_name">First Name</label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={customer.firstName}
+            id="first_name"
+            name="first_name"
+            value={customer.first_name}
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="last_name">Last Name</label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            value={customer.lastName}
+            id="last_name"
+            name="last_name"
+            value={customer.last_name}
             onChange={handleChange}
             required
           />
