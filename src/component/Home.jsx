@@ -1,30 +1,28 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/home.css";
-import debounce from "lodash.debounce"; // Import lodash.debounce
+import debounce from "lodash.debounce";
 
 function Home() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("id");
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("authToken");
-
-  // Debounced fetchCustomers function
+  console.log("token>>>>>",token)
   const fetchCustomers = useCallback(
     debounce(async () => {
       setLoading(true);
-      setError(null); // Reset error before fetching
+      setError(null);
       try {
         const response = await fetch(
-          `http://localhost:3000/api/customers/private/ListOfCustomer?search=${encodeURIComponent(
-            search
-          )}&page=${page}&size=${size}&sort=${sort}`,
+          // "http://localhost:3000/api/customers/private/ListOfCustomer?search=Chandan&sort=firstName&size=11&page=0",
+          `http://localhost:3000/api/customers/public/ListOfCustomer?search=${search}&page=${page}&size=${size}&sort=${sort}`,
           {
             method: "GET",
             headers: {
@@ -41,16 +39,16 @@ function Home() {
         const data = await response.json();
         setCustomers(data.content);
       } catch (error) {
-        setError(error.message); // Set error message to display
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     }, 300),
     [search, page, size, sort, token]
-  ); // Debounce delay of 300ms
+  );
 
   useEffect(() => {
-    fetchCustomers(); // Trigger fetch on dependencies change
+    fetchCustomers();
   }, [fetchCustomers]);
 
   const handleUpdate = (id) => {
@@ -60,7 +58,7 @@ function Home() {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/customers/private/${id}`,
+        `http://localhost:3000/api/customers/public/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -74,9 +72,9 @@ function Home() {
         throw new Error("Error deleting customer");
       }
 
-      fetchCustomers(); // Refresh list after deletion
+      fetchCustomers();
     } catch (error) {
-      setError(error.message); // Set error message to display
+      setError(error.message);
     }
   };
 
@@ -91,7 +89,7 @@ function Home() {
   const handleScnc = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/customers/userList",
+        "http://localhost:3000/api/customers/public/userList",
         {
           method: "GET",
           headers: {
@@ -131,7 +129,7 @@ function Home() {
             type="text"
             placeholder="Search by name"
             value={search}
-            onChange={handleSearch} // Update search state on input change
+            onChange={handleSearch}
           />
           <button className="search-btn" onClick={fetchCustomers}>
             Search

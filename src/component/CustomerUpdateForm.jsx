@@ -23,7 +23,7 @@ function CustomerUpdateForm() {
     const fetchCustomer = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/customers/private/${id}`,
+          `http://localhost:3000/api/customers/public/${id}`,
           {
             method: "GET",
             headers: {
@@ -61,7 +61,7 @@ function CustomerUpdateForm() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/customers/private/${id}`,
+        `http://localhost:3000/api/customers/public/${id}`,
         {
           method: "PUT",
           headers: {
